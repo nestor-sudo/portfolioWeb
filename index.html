@@ -182,6 +182,15 @@
     }
 
     /* --------------------------------------------------
+       About Section Image Responsiveness
+    -------------------------------------------------- */
+    #about .about-img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* --------------------------------------------------
        Quote Section Styling (with decorative quotes)
     -------------------------------------------------- */
     #quote {
@@ -195,7 +204,6 @@
       text-align: center;
       position: relative;
     }
-    /* Blockquote styling with decorative quotes */
     #quote blockquote {
       position: relative;
       font-family: Georgia, serif;
@@ -228,7 +236,6 @@
       font-size: 1.7rem;
       margin: 0;
     }
-    /* Responsive adjustments for quote section */
     @media (max-width: 768px) {
       #quote {
         padding: 20px 10px;
@@ -244,6 +251,16 @@
       #quote p.cite {
         font-size: 1.2rem;
       }
+    }
+
+    /* --------------------------------------------------
+       Gallery Instructions Text
+    -------------------------------------------------- */
+    .gallery-instructions {
+      font-size: 0.1rem;
+      text-align: left;  
+      color: #ACAAA8;    /* Same grey as the subtext */
+      margin-top: 0.5rem;
     }
 
     /* --------------------------------------------------
@@ -267,7 +284,6 @@
     -------------------------------------------------- */
     .gallery-slideshow {
       width: 100%;
-      /* Maintain a 16:9 aspect ratio */
       aspect-ratio: 16/9;
       position: relative;
       overflow: hidden;
@@ -277,7 +293,6 @@
       height: 100%;
       max-width: 100%;
       max-height: 100%;
-      /* Use 'contain' to display full image/video */
       object-fit: contain;
       position: absolute;
       opacity: 0;
@@ -383,7 +398,7 @@
   ================================================== -->
   <div class="section" id="about">
     <div class="subsection">
-      <img src="Images/RiverScene.png" alt="About Me Image" style="width: auto; height: 100%; border-radius: 10px;">
+      <img src="Images/RiverScene.png" alt="About Me Image" class="about-img">
     </div>
     <div class="subsection">
       <h2>About Me</h2>
@@ -406,7 +421,6 @@
   <div class="section" id="blender">
     <div class="subsection">
       <h2 style="font-size: 2rem; color: #F28610; margin-bottom: 10px;">Discovering Blender</h2>
-      <!-- Using .blender-text for responsive margin/padding -->
       <p class="blender-text">
         Being in the programming space, I started noticing beautiful 3D renders, which fascinated me and led me to explore the world
         of 3D design. After some searching, I discovered <strong>Blender</strong>, a powerful and versatile tool for 3D modeling.
@@ -415,6 +429,8 @@
         I began with simple YouTube tutorials and quickly fell in love with the creative aspect of building something from scratch.
         Some of my projects are displayed on the right, showcasing my journey from basic modeling to more complex designs.
       </p>
+      <!-- Instructional text for the Blender gallery (now left aligned, smaller, and grey) -->
+      <p class="gallery-instructions">*Click each image/video to show the next slide</p>
     </div>
     <div class="subsection">
       <!-- Blender Gallery Slideshow -->
@@ -488,17 +504,13 @@
         Eventually, I built my first personal PC, which deepened my passion for hardware. This hands-on experience, combined with my growing knowledge,
         even allowed me to earn a few hundred dollars building custom PCs for friends.
       </p>
+        <!-- Instructional text for the PC Building gallery -->
+      <p class="gallery-instructions">*Click each image/video to show the next slide</p>
     </div>
     <div class="subsection">
       <!-- PC Building Gallery Slideshow -->
       <div class="gallery-slideshow" id="gallery">
-        <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 1" class="gallery-item">
-        <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 2" class="gallery-item">
-        <video loop autoplay muted class="gallery-item">
-          <source src="/Images/0001-0080.mkv" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 3" class="gallery-item">
+        <img src="Images\BuildingPCvideo.mp4" alt="PcBuilding Project 1" class="gallery-item">
       </div>
     </div>
   </div>
