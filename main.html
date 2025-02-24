@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            overflow-x: hidden;
+        }
+
+        .header {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        .header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .header .content {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: left;
+            max-width: 400px;
+            z-index: 1;
+        }
+        .header .content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #F28610, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        .header .content h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            z-index: -1;
+            filter: blur(5px);
+            opacity: 0.8;
+        }
+        .header .content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .menu-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 400px;
+            background-color: #F28610;
+            color: white;
+            list-style: none; 
+            padding: 120px 20px 20px 40px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 3;
+            overflow-y: auto;
+            overflow-x: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        li {
+            padding: 20px 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        li a:hover {
+            color: #231F20;
+        }
+
+        .section {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            text-align: left;
+        }
+        .subsection {
+            padding: 30px 30px;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ACAAA8;
+        }
+        .section:nth-child(odd) .subsection:nth-child(1) {
+            width: 60%;
+            background-color: #F4EEEA;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .section:nth-child(odd) .subsection:nth-child(2) {
+            width: 40%;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+        }
+        .section:nth-child(even) .subsection:nth-child(1) {
+            width: 40%;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+        }
+        .section:nth-child(even) .subsection:nth-child(2) {
+            width: 60%;
+            background-color: #F4EEEA;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+        }
+        .subsection h2 {
+            padding-bottom: 20px;
+            font-size: 2rem;
+            color: #F28610;
+        }
+        .subsection p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            overflow-x: hidden;
+            height: 100%;
+            width: 100%;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            overscroll-behavior: contain;
+            content: 0;
+            padding: 0;
+        }
+        .gallery img:hover, .gallery video:hover {
+            cursor: url(/Images/circle-solid.svg), default;
+        }
+        .gallery img:hover::after, .gallery video:hover::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #F28610;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .gallery img:hover::after, .gallery video:hover::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: #F28610;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .gallery img, .gallery video {
+            width: 100%;
+            height: auto;
+            max-width: 100vw;
+            border-radius: 10px;
+            scroll-snap-align: start;
+            object-fit: contain;
+        }
+        
+
+        @media (max-width: 768px) {
+            .header .content h1 {
+                font-size: 2rem;
+            }
+            .header .content p {
+                font-size: 1rem;
+            }
+            .menu-button {
+                padding: 8px 16px;
+            }
+            .subsection {
+                width: 100%;
+                padding: 60px 10px;
+            }
+            .subsection h2 {
+                font-size: 2rem;
+            }
+            .subsection p {
+                font-size: 1rem;
+            }
+            .gallery {
+                height: auto;
+            }
+        }
+    .continue-button {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 30px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .continue-button:hover, .menu-button:hover{
+            transform: scale(0.95);
+            background-color: transparent;
+        }
+        
+        .continue-button:hover::before, .menu-button:hover::before{
+            opacity: 1;
+        }
+        
+        .continue-button:hover, .menu-button:hover{
+            background-color: transparent;
+            color: white;
+        }
+    
+        blockquote {
+            font-family: Georgia, serif;
+            position: relative;
+            margin: 0;
+            padding: 0.5em 5em 0.5em 5em;
+        }
+        blockquote:before {
+            font-family: Georgia, serif;
+            position: absolute;
+            font-size: 10em;
+            line-height: 1;
+            top: 0;
+            left: 0;
+            content: "\201C";
+        }
+        blockquote:after {
+            font-family: Georgia, serif;
+            position: absolute;
+            float: right;
+            font-size:10em;
+            line-height: 1;
+            right: 0;
+            bottom: -0.5em;
+            content: "\201D";
+        }
+        blockquote cite:before {
+            content: "\2013";
+        }
+
+    
+    .gallery {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            content: none;
+        }
+        .gallery-item {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .gallery-item.active {
+            opacity: 1;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <video autoplay loop muted>
+            <source src="/Images/0001-0300.mkv" type="video/mp4">
+        </video>
+        <div class="content">
+            <h1 style="color: #F28610; padding: 0%;">Hi, Im Néstor Pérez</h1>
+            <p>Explore my journey through 3D modeling, programming, and PC building.</p>
+            <button class="continue-button" onclick="scrollToSection('about')">Continue</button>
+        </div>
+        <button class="menu-button" onclick="toggleMenu()">Menu</button>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <ul style="list-style-type: none"> 
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#blender">3D Blender Projects</a></li>
+                <li><a href="#programming">Programming Journey</a></li>
+                <li><a href="#pc-building">PC Building Experience</a></li>
+            </ul>
+            <p style="font-size: 10px; color: white; margin-top: auto; text-align: center;">*All images used in this website have been created by me.</p>
+        </div>
+    </div>
+
+    <div class="section" id="quote" style="background: linear-gradient(to left bottom, #F28610, #ffae00); background-color: #F28610; color: white; height: 100vh; display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; justify-content: space-around; align-items: center;">
+
+        <div>
+            <blockquote>
+                <p style="font-weight: 600; font-size: 2.5rem; font-style: normal; font-style: normal; color: white; padding: 0%; padding-block: 6%;">I have no special talent. I am only passionately curious.</p>
+            </blockquote>
+            <p style="font-size: 1.7rem; font-style: normal; text-align: center;">-Albert Einstein</p>
+        </div>
+
+    </div>
+
+    <div class="section" id="about">
+        <div class="subsection">
+            <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/lebron-james-portraits-nathaniel-s-butler.jpg" alt="About Me Image" style="width: auto; height: 100%; border-radius: 10px;">
+        </div>
+        <div class="subsection">
+            <h2>About Me</h2>
+            <p>Curiosity has always been a defining trait of mine, a spark that truly ignited when I moved to the United States. Being in a new country, everything around me felt like an opportunity waiting to be explored. This constant sense of wonder pushed me to try new things—joining track and cross country alongside basketball, which I already played. With dedication, I managed to place in the top 50 at nationals during only my second year of training.</p>
+            <p style="padding-top: 20px;">This same curiosity also fueled my passion for technology and programming. The thrill of learning, experimenting, and creating continues to inspire me every day, shaping who I am and what I strive to achieve.
+
+            </p>
+        </div>
+    </div>
+
+    <div class="section" id="blender">
+        <div class="subsection">
+            <h2 style="font-size: 2rem; color: #F28610; margin-bottom: 10px; text-align: left;">Discovering Blender</h2>
+            <p style="margin-right: 9rem; text-align: left;">Being in the programming space, I started noticing beautiful 3D renders, which fascinated me and led me to explore the world of 3D design. After some searching, I discovered <strong>Blender</strong>, a powerful and versatile tool for 3D modeling. </p>
+            <p style="margin-right: 9rem; text-align: left; padding-top: 20px;">I began with simple YouTube tutorials and quickly fell in love with the creative aspect of building something from scratch. Some of my projects are displayed on the right, showcasing my journey from basic modeling to more complex designs.</p>
+        </div>
+        <div class="subsection">
+            <div class="gallery" id="pc-gallery">
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="Blender Project 1" class="gallery-item">
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="Blender Project 2" class="gallery-item">
+                <video loop autoplay muted class="gallery-item">
+                    <source src="/Images/0001-0080.mkv" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="Blender Project 3" class="gallery-item">
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="programming">
+        <div class="subsection" style="text-align: center;">
+            <h2 style="border-bottom: 1px solid #ACAAA8; padding-bottom: 5px; ">Skill Proficiency</h2>
+            <div style="width: 80%; height: 45%; display: flex; text-align: center; justify-content: space-around; align-items: flex-end; border-bottom: 1px solid #ACAAA8; margin-bottom: -1px; position: relative;">
+                <div style="width: 25%; height: 40%; background-color: #AF9880; text-align: center; color: white; padding-top: 10px; border-radius: 10px 10px 0 0;">
+                    <p style="margin: 0;">C++</p>
+                    <p style="margin: 0;"></p>
+                </div>
+                <div style="width: 20%; height: 60%; background-color: #AFAFAF; text-align: center; color: white; padding-top: 10px; border-radius: 10px 10px 0 0;">
+                    <p style="margin: 0;">Python</p>
+                    <p style="margin: 0;"></p>
+                </div>
+                <div style="width: 20%; height: 50%; background-color: #F28610; text-align: center; color: white; padding-top: 10px; border-radius: 10px 10px 0 0;">
+                    <p style="margin: 0;">Web Dev</p>
+                    <p style="margin: 0;"></p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="subsection">
+            <h2>Programming Journey</h2>
+            <p>I started my programming journey with <strong>web design</strong>, which instantly captivated me. The ability to see changes in real-time while building websites was both exciting and rewarding. This fascination pulled me deeper into the world of programming, where I began exploring the fundamentals by immersing myself in programming books and online resources.</p>
+            <p style="padding-top: 20px;">As I gained a solid foundation, I transitioned to <strong>Python</strong>, drawn by its simplicity and versatility. Python opened doors to a wide range of possibilities, from data analysis to automation and beyond.</p>
+            <p style="padding-top: 20px;">Eventually, my curiosity led me to <strong>C++</strong>, where I delved into low-level programming concepts and learned how to create high-performance applications. Each step in this journey has expanded my skills and deepened my passion for problem-solving through code.</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="section" id="pc-building">
+        <div class="subsection">
+            <h2>PC Building Experience</h2>
+            <p>Being immersed in the tech world, I frequently came across impressive PC builds that sparked my interest. This curiosity drove me to research various components, learning about the market and understanding how each part contributed to building a functional and efficient system.</p>
+            <p style="padding-top: 20px;">Eventually, I built my first personal PC, which deepened my passion for hardware. This hands-on experience, combined with my growing knowledge, even allowed me to earn a few hundred dollars building custom PCs for friends.
+
+            </p>
+        </div>
+        <div class="subsection">
+            <div class="gallery" id="gallery">
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 1" class="gallery-item">
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 2" class="gallery-item">
+                <video loop autoplay muted class="gallery-item">
+                    <source src="/Images/0001-0080.mkv" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="https://t4.ftcdn.net/jpg/02/01/78/01/360_F_201780104_hetXS26W8alnsbDKbpnr4sVizJfiO12w.jpg" alt="PcBuilding Project 3" class="gallery-item">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('dropdown-menu');
+            if (menu.style.opacity === '1') {
+                menu.style.opacity = '0';
+                menu.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.style.opacity = '1';
+                menu.style.visibility = 'visible';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        let currentIndex = 0;
+        const galleryItems = document.querySelectorAll('#gallery .gallery-item');
+        const pcGalleryItems = document.querySelectorAll('#pc-gallery .gallery-item');
+
+        function showNextItem() {
+            galleryItems[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            galleryItems[currentIndex].classList.add('active');
+        }
+
+        document.getElementById('gallery').addEventListener('click', showNextItem);
+        document.getElementById('pc-gallery').addEventListener('click', function() {
+            pcGalleryItems[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % pcGalleryItems.length;
+            pcGalleryItems[currentIndex].classList.add('active');
+        });
+        galleryItems[0].classList.add('active');
+        pcGalleryItems[0].classList.add('active');
+    </script>
+
+</body>
+</html>
