@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Néstor Pérez</title>
   <style>
-
     /* --------------------------------------------------
        Import Fonts & Global Styles
     -------------------------------------------------- */
@@ -22,9 +21,8 @@
     }
 
     /* ----------------------------------------------------
-      LOADER
+       LOADER
     ----------------------------------------------------- */
-    
     #loader {
       position: fixed;
       top: 0;
@@ -38,13 +36,11 @@
       z-index: 9999;
       opacity: 1;
     }
-
     #welcome-text {
       font-size: 10rem;
       color: #F28610;
       animation: flyIn 1s ease-out;
     }
-
     @keyframes flyIn {
       0% {
         transform: translateX(-100%);
@@ -55,16 +51,13 @@
         opacity: 1;
       }
     }
-
     .fade-out {
       animation: fadeOut 0.5s ease-out forwards;
     }
-
     @keyframes fadeOut {
       from { opacity: 1; }
       to { opacity: 0; }
     }
-
     #content {
       display: none;
     }
@@ -220,7 +213,11 @@
       justify-content: center;
       align-items: flex-start;
     }
+    /* Global h2 rule: center the element horizontally while keeping its text left aligned */
     .subsection h2 {
+      display: inline-block;
+      margin: 0 auto;
+      text-align: left;
       padding-bottom: 20px;
       font-size: 2rem;
       color: #F28610;
@@ -259,12 +256,13 @@
       margin: 0;
       padding: 0.5em 5em;
     }
+    /* Decorative quotes: 10rem on desktop, 8rem on mobile */
     #quote blockquote:before {
       content: "\201C";
       position: absolute;
       top: -20px;
       left: 0;
-      font-size: 7.5rem;
+      font-size: 10rem;
       color: white;
     }
     #quote blockquote:after {
@@ -272,7 +270,7 @@
       position: absolute;
       bottom: -20px;
       right: 0;
-      font-size: 7.5rem;
+      font-size: 10rem;
       color: white;
     }
     #quote blockquote p {
@@ -291,7 +289,7 @@
       }
       #quote blockquote:before,
       #quote blockquote:after {
-        font-size: 6rem;
+        font-size: 8rem;
       }
       #quote blockquote p {
         font-size: 1.8rem;
@@ -306,10 +304,11 @@
        Gallery Instructions Text
     -------------------------------------------------- */
     .gallery-instructions {
-      font-size: 0.1rem;
-      text-align: left;  
-      color: #ACAAA8;    /* Same grey as the subtext */
+      font-size: 0.8rem;
+      text-align: left;
+      color: #ACAAA8;
       margin-top: 0.5rem;
+      align-self: flex-start;
     }
 
     /* --------------------------------------------------
@@ -354,9 +353,7 @@
     /* --------------------------------------------------
        Blender Section Specific Adjustments
     -------------------------------------------------- */
-    #blender .blender-text {
-
-    }
+    /* No additional styles for .blender-text currently */
     @media (max-width: 768px) {
       #blender .blender-text {
         margin-right: 1rem;
@@ -404,10 +401,10 @@
 </head>
 <body>
 
-    <!-- Loader overlay -->
-    <div id="loader">
-      <div id="welcome-text">Welcome!!</div>
-    </div>
+  <!-- Loader overlay -->
+  <div id="loader">
+    <div id="welcome-text">Welcome!!</div>
+  </div>
   
   <!-- ==================================================
        HEADER SECTION
@@ -474,7 +471,8 @@
   ================================================== -->
   <div class="section" id="blender">
     <div class="subsection">
-      <h2 style="font-size: 2rem; color: #F28610;">Discovering Blender</h2>
+      <!-- Discovering Blender title: centered container with text left aligned -->
+      <h2>Discovering Blender</h2>
       <p class="blender-text">
         Being in the programming space, I started noticing beautiful 3D renders, which fascinated me and led me to explore the world
         of 3D design. After some searching, I discovered <strong>Blender</strong>, a powerful and versatile tool for 3D modeling.
@@ -483,8 +481,8 @@
         I began with simple YouTube tutorials and quickly fell in love with the creative aspect of building something from scratch.
         Some of my projects are displayed on the right, showcasing my journey from basic modeling to more complex designs.
       </p>
-      <!-- Instructional text for the Blender gallery (now left aligned, smaller, and grey) -->
-      <p class="gallery-instructions" style="font-size: 0.8rem;">*Click each image/video to show the next slide</p>
+      <!-- Gallery instructions for Blender -->
+      <p class="gallery-instructions">*Click each image/video to show the next slide</p>
     </div>
     <div class="subsection">
       <!-- Blender Gallery Slideshow -->
@@ -513,7 +511,8 @@
   ================================================== -->
   <div class="section" id="programming">
     <div class="subsection" style="text-align: center;">
-      <h2 style="border-bottom: 1px solid #ACAAA8; padding-bottom: 5px;">Skill Proficiency</h2>
+      <!-- Skill Proficiency title: centered -->
+      <h2>Skill Proficiency</h2>
       <div style="width: 80%; height: 45%; display: flex; justify-content: space-around; align-items: flex-end; border-bottom: 1px solid #ACAAA8; margin-bottom: -1px;">
         <div style="width: 25%; height: 40%; background-color: #AF9880; text-align: center; color: white; padding-top: 10px; border-radius: 10px 10px 0 0;">
           <p style="margin: 0;">C++</p>
@@ -549,7 +548,8 @@
   ================================================== -->
   <div class="section" id="pc-building">
     <div class="subsection">
-      <h2>PC Building Experience</h2>
+      <!-- PC Building Experience title: left aligned -->
+      <h2 style="text-align: left;">PC Building Experience</h2>
       <p>
         Being immersed in the tech world, I frequently came across impressive PC builds that sparked my interest. This curiosity drove me to
         research various components, learning about the market and understanding how each part contributed to building a functional and efficient system.
@@ -558,13 +558,13 @@
         Eventually, I built my first personal PC, which deepened my passion for hardware. This hands-on experience, combined with my growing knowledge,
         even allowed me to earn a few hundred dollars building custom PCs for friends.
       </p>
-        <!-- Instructional text for the PC Building gallery -->
-      <p class="gallery-instructions" style="font-size: 0.8rem";>*Click each image/video to show the next slide</p>
+      <!-- Gallery instructions for PC Building -->
+      <p class="gallery-instructions">*Click each image/video to show the next slide</p>
     </div>
     <div class="subsection">
       <!-- PC Building Gallery Slideshow -->
       <div class="gallery-slideshow" id="gallery">
-        <img src="Images\BuildingPCvideo.mp4" alt="PcBuilding Project 1" class="gallery-item">
+        <img src="Images/BuildingPCvideo.mp4" alt="PcBuilding Project 1" class="gallery-item">
       </div>
     </div>
   </div>
@@ -573,19 +573,16 @@
        JAVASCRIPT
   ================================================== -->
   <script>
-    //LOADER
+    // LOADER
     window.addEventListener('load', function() {
-      // Optional: delay to let the fly-in animation complete before starting fade-out
       setTimeout(function() {
         const loader = document.getElementById('loader');
-        // Add the fade-out class to start the fade-out animation
         loader.classList.add('fade-out');
-        // Wait for the fade-out animation to finish (0.5s) before hiding the loader
         setTimeout(function() {
           loader.style.display = 'none';
           document.getElementById('content').style.display = 'block';
         }, 500);
-      }, 1500); // Adjust delay as needed (in milliseconds)
+      }, 1500);
     });
 
     // Toggle dropdown menu visibility
